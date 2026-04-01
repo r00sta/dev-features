@@ -1,0 +1,22 @@
+{
+    "name": "Base Development Environment",
+    "id": "base",
+    "version": "1.0.0",
+    "description": "Installs core packages, utilities, helix editor, and opencode",
+    "options": {
+        "helixVersion": {
+            "type": "string",
+            "proposals": ["25.07.1","25.07","25.01.1","25.01","24.07","24.03"],
+            "default": "25.07.1",
+            "description": "Helix editor version"
+        },
+        "opencodeVersion": {
+              "type": "string",
+              "default": "latest",
+              "description": "Specific version number to install, eg: 1.1.13"
+        },
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
