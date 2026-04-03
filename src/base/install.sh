@@ -87,6 +87,10 @@ install_helix() {
   log_debug "Cleaning up"
   rm -rf helix-"$HX_VER"-x86_64-linux helix-"$HX_VER"-x86_64-linux.tar.xz
 
+  log_info "Installing linters and formatters"
+  log_debug "Installing prettier, prettier-plugin-toml"
+  npm install -g prettier prettier-plugin-toml yaml-language-server vscode-langservers-extracted 2>/dev/null || true
+
   # Verify installation
   if command -v hx >/dev/null 2>&1; then
     version=$(hx --version 2>&1 | head -n1)
@@ -138,6 +142,7 @@ install_rhel() {
   dnf -y install git-delta direnv mosh picocom 2>/dev/null || true
   dnf -y install zsh-autosuggestions zsh-syntax-highlighting 2>/dev/null || true
   dnf -y install bash-language-server shfmt 2>/dev/null || true
+  dnf -y install npm 2>/dev/null || true
 
   install_opencode
   install_helix
@@ -155,6 +160,7 @@ install_debian() {
   apt-get -y install zsh git git-delta direnv mosh picocom 2>/dev/null || true
   apt-get -y install zsh-autosuggestions zsh-syntax-highlighting 2>/dev/null || true
   apt-get -y install bash-language-server shfmt 2>/dev/null || true
+  apt-get -y install npm 2>/dev/null || true
 
   install_opencode
   install_helix
