@@ -15,5 +15,5 @@
   },
   "remoteUser": "dev",
   "containerUser": "dev",
-  "postCreateCommand": "git clone https://gitlab.com/r00sta/dotfiles_public.git ${HOME}/.dotfiles && cd ${HOME}/.dotfiles && ./install -v"
+  "postCreateCommand": "git clone https://gitlab.com/r00sta/dotfiles_public.git ${HOME}/.dotfiles && cd ${HOME}/.dotfiles && ./install -v",
 }
