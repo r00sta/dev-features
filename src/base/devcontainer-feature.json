@@ -1,7 +1,7 @@
 {
   "name": "Base Development Environment",
   "id": "base",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Installs core packages, utilities, helix editor, and opencode",
   "options": {
     "helixVersion": {

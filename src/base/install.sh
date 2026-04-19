@@ -148,6 +148,9 @@ install_rhel() {
   install_helix
   install_starship
 
+  # Copy util.sh to shared location for other features
+  cp "$(dirname "$0")/util.sh" /usr/local/share/devcontainers/util.sh
+
   log_debug "install_rhel: complete"
 }
 
@@ -165,6 +168,9 @@ install_debian() {
   install_opencode
   install_helix
   install_starship
+
+  # Copy util.sh to shared location for other features
+  cp "$(dirname "$0")/util.sh" /usr/local/share/devcontainers/util.sh
 
   log_debug "install_debian: complete"
 }
