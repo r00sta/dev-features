@@ -135,6 +135,41 @@ install_starship() {
   fi
 }
 
+install_gitnr() {
+  log_debug "install_gitnr: starting"
+
+  # Check if already installed
+  if command -v gitnr >/dev/null 2>&1; then
+    version=$(gitnr --version 2>&1 | head -n1)
+    log_debug "${version} is already installed"
+    return 0
+  fi
+
+  log_debug "gitnr not found in PATH"
+
+  # Dependencies
+  if ! has_command curl; then
+    log_error "This feature requires curl to be installed. Install with devcontainer feature ghcr.io/devcontainers/features/common-utils"
+    return 1
+  fi
+
+  log_debug "curl found, proceeding with installation"
+  log_info "Installing gitnr latest via raw.githubusercontent.com/reemus-dev/gitnr/main/scripts/install.sh"
+  echo ""
+
+  remote_user_run "mkdir -p ~/.local/bin"
+  remote_user_run 'curl -s https://raw.githubusercontent.com/reemus-dev/gitnr/main/scripts/install.sh | bash -s -- -u'
+
+  # Verify installation
+  if command -v gitnr >/dev/null 2>&1; then
+    version=$(gitnr --version 2>&1 | head -n1)
+    log_debug "Gitnr ${version} installed successfully"
+  else
+    log_error "Gitnr installation verification failed"
+  fi
+
+}
+
 install_rhel() {
   log_debug "install_rhel: starting"
 
@@ -143,14 +178,6 @@ install_rhel() {
   dnf -y install zsh-autosuggestions zsh-syntax-highlighting 2>/dev/null || true
   dnf -y install bash-language-server shfmt 2>/dev/null || true
   dnf -y install npm 2>/dev/null || true
-
-  install_opencode
-  install_helix
-  install_starship
-
-  # Copy util.sh to shared location for other features
-  mkdir -p /usr/local/share/devcontainers
-  cp "$(dirname "$0")/util.sh" /usr/local/share/devcontainers/util.sh
 
   log_debug "install_rhel: complete"
 }
@@ -165,14 +192,6 @@ install_debian() {
   apt-get -y install zsh-autosuggestions zsh-syntax-highlighting 2>/dev/null || true
   apt-get -y install bash-language-server shfmt 2>/dev/null || true
   apt-get -y install npm 2>/dev/null || true
-
-  install_opencode
-  install_helix
-  install_starship
-
-  # Copy util.sh to shared location for other features
-  mkdir -p /usr/local/share/devcontainers
-  cp "$(dirname "$0")/util.sh" /usr/local/share/devcontainers/util.sh
 
   log_debug "install_debian: complete"
 }
@@ -194,5 +213,19 @@ case "$OS" in
     log_error "Unknown OS"
     ;;
 esac
+
+# Run OS agnostic installs
+
+log_info "Running OS agnostice installs"
+
+install_opencode
+install_helix
+install_starship
+install_gitnr
+
+log_info "Copying util.sh for other features to use"
+# Copy util.sh to shared location for other features
+mkdir -p /usr/local/share/devcontainers
+cp "$(dirname "$0")/util.sh" /usr/local/share/devcontainers/util.sh
 
 log_debug "Done"
