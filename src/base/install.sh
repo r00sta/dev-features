@@ -159,15 +159,6 @@ install_gitnr() {
 
   remote_user_run "mkdir -p ~/.local/bin"
   remote_user_run 'curl -s https://raw.githubusercontent.com/reemus-dev/gitnr/main/scripts/install.sh | bash -s -- -u'
-
-  # Verify installation
-  if command -v gitnr >/dev/null 2>&1; then
-    version=$(gitnr --version 2>&1 | head -n1)
-    log_debug "Gitnr ${version} installed successfully"
-  else
-    log_error "Gitnr installation verification failed"
-  fi
-
 }
 
 install_rhel() {
