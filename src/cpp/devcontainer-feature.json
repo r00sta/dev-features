@@ -1,0 +1,9 @@
+{
+    "name": "C/C++ Development Environment",
+    "id": "cpp",
+    "version": "1.0.0",
+    "description": "Installs GCC, G++, Make, CMake, Clang, Clang tools, LLDB, OpenOCD",
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/base"
+    ]
+}
