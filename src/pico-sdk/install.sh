@@ -48,17 +48,11 @@ install_pico_sdk() {
 		return 1
 	fi
 
-	log_debug "Cloning SDK to /tmp/pico-sdk"
-	git clone --branch "${PICO_SDK_VER}" --depth 1 https://github.com/raspberrypi/pico-sdk.git /tmp/pico-sdk
+	log_debug "Cloning SDK directly to ${SDK_DIR}"
+	git clone --branch "${PICO_SDK_VER}" --depth 1 https://github.com/raspberrypi/pico-sdk.git "$SDK_DIR"
 
 	log_debug "Initializing submodules"
-	cd /tmp/pico-sdk && git submodule update --init
-
-	log_debug "Moving SDK to ${SDK_DIR}"
-	mkdir -p "$SDK_DIR"
-	mv /tmp/pico-sdk/* "$SDK_DIR/".
-	mv /tmp/pico-sdk/.git "$SDK_DIR/". 2>/dev/null || true
-	rm -rf /tmp/pico-sdk
+	cd "$SDK_DIR" && git submodule update --init
 
 	log_debug "Setting permissions"
 	chown -R root:root "$SDK_DIR"
