@@ -1,17 +1,20 @@
 {
-    "name": "ARM GNU Toolchain",
-    "id": "arm-gnu",
-    "version": "1.0.0",
-    "description": "Installs ARM GNU Embedded Toolchain for bare-metal ARM development",
-    "options": {
-        "version": {
-            "type": "string",
-            "proposals": ["13.3.rel1"],
-            "default": "13.3.rel1",
-            "description": "ARM toolchain version"
-        }
-    },
-    "installsAfter": [
-        "ghcr.io/devcontainers/features/cpp"
-    ]
+  "name": "ARM GNU Toolchain",
+  "id": "arm-gnu",
+  "version": "1.0.1",
+  "description": "Installs ARM GNU Embedded Toolchain for bare-metal ARM development",
+  "options": {
+    "version": {
+      "type": "string",
+      "proposals": [
+        "13.3.rel1"
+      ],
+      "default": "13.3.rel1",
+      "description": "ARM toolchain version"
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/cpp",
+    "ghcr.io/devcontainers/features/base"
+  ]
 }

@@ -1,7 +1,7 @@
 {
   "name": "Raspberry Pi Pico SDK",
   "id": "pico-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Installs Raspberry Pi Pico SDK and picotool for C/C++ development",
   "options": {
     "version": {
@@ -14,6 +14,7 @@
     }
   },
   "installsAfter": [
-    "ghcr.io/devcontainers/features/cpp"
+    "ghcr.io/devcontainers/features/cpp",
+    "ghcr.io/devcontainers/features/base"
   ]
 }
