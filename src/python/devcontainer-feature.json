@@ -1,9 +1,9 @@
 {
-    "name": "Python Development Environment",
-    "id": "python",
-    "version": "1.0.0",
-    "description": "Installs uv, Python tools (ruff, pyright, pylsp)",
-    "installsAfter": [
-        "ghcr.io/devcontainers/features/base"
-    ]
+  "name": "Python Development Environment",
+  "id": "python",
+  "version": "1.0.1",
+  "description": "Installs uv, Python tools (ruff, pyright, pylsp)",
+  "installsAfter": [
+    "ghcr.io/r00sta/dev-features/base"
+  ]
 }

@@ -21,7 +21,7 @@
       "type": "string",
       "default": "latest",
       "description": "Specific version number to install, eg: 1.1.13"
-    },
+    }
   },
   "installsAfter": [
     "ghcr.io/devcontainers/features/common-utils"
