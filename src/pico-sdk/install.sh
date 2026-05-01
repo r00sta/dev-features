@@ -84,7 +84,7 @@ install_picotool() {
 	log_debug "Building picotool"
 	cd "$PICOTOOL_DIR"
 	export PICO_SDK_PATH="$SDK_DIR"
-	cmake -S . -B build
+	cmake -S . -B build -DCMAKE_CXX_FLAGS="-fpermissive"
 	cmake --build build
 
 	log_debug "Installing picotool"
