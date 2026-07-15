@@ -29,7 +29,7 @@ install_opencode() {
 
   # Run the install as the remote user, as script installs locally
   if [ "${OPENCODE_VER-latest}" = "latest" ]; then
-    remote_user_run 'curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path'
+    remote_user_run "curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path"
   else
     remote_user_run "curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path --version $OPENCODE_VER"
   fi
@@ -44,6 +44,10 @@ install_opencode() {
   else
     log_error "Open Code installation verification failed"
   fi
+
+  # Install mcp servers
+  log_info "Installing codebase-memory-mcp from https://github.com/DeusData/codebase-memory-mcp"
+  remote_user_run "curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash"
 }
 
 install_helix() {
