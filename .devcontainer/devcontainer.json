@@ -1,19 +1,23 @@
 {
   "name": "test",
   "image": "fedora:latest",
+  "runArgs": [
+    "--network=host"
+  ],
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
       "configureZshAsDefaultShell": true,
       "username": "dev",
       "userUid": "1000",
-      "userGid": "1000",
+      "userGid": "1000"
     },
     "ghcr.io/devcontainers/features/git:1": {},
-    "../src/base":{
-      "helixVersion":"25.07.1",
+    "../src/base": {
+      "helixVersion": "25.07.1"
     },
+    "../src/cpp": {},
+    "../src/arm-gnu": {}
   },
   "remoteUser": "dev",
-  "containerUser": "dev",
-  "postCreateCommand": "git clone https://gitlab.com/r00sta/dotfiles_public.git ${HOME}/.dotfiles && cd ${HOME}/.dotfiles && ./install -v",
+  "containerUser": "dev"
 }
