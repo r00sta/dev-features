@@ -172,7 +172,7 @@ install_rhel() {
   dnf -y install git-delta direnv mosh picocom 2>/dev/null || true
   dnf -y install zsh-autosuggestions zsh-syntax-highlighting 2>/dev/null || true
   dnf -y install bash-language-server shfmt 2>/dev/null || true
-  dnf -y install npm 2>/dev/null || true
+  dnf -y install npm ripgrep 2>/dev/null || true
 
   log_debug "install_rhel: complete"
 }
@@ -186,7 +186,7 @@ install_debian() {
   apt-get -y install zsh git git-delta direnv mosh picocom 2>/dev/null || true
   apt-get -y install zsh-autosuggestions zsh-syntax-highlighting 2>/dev/null || true
   apt-get -y install bash-language-server shfmt 2>/dev/null || true
-  apt-get -y install npm 2>/dev/null || true
+  apt-get -y install npm ripgrep 2>/dev/null || true
 
   log_debug "install_debian: complete"
 }
