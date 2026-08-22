@@ -127,6 +127,35 @@ Installs Pico SDK (default 2.2.0), builds/installs picotool, sets `PICO_SDK_PATH
 
 ---
 
+### 6. Zephyr RTOS Development Environment (`zephyr`)
+Installs Zephyr RTOS, west meta-tool, Python dependencies via uv, and Zephyr SDK toolchains (configurable by architecture).
+
+**Version:** 1.0.0
+
+**Options:**
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `version` | string | `4.4.1` | Zephyr RTOS version. Proposals: `4.4.1`, `4.4.0`, `4.3.1`, `4.3.0`, `3.7.0` |
+| `sdkVersion` | string | `1.0.1` | Zephyr SDK version. Proposals: `1.0.1`, `1.0.0` |
+| `target` | string | `arm` | Target architecture(s) for SDK toolchains. Comma-separated (e.g. `arm,riscv64`) or `all` |
+
+**Usage Template:**
+```jsonc
+{
+    "features": {
+        "ghcr.io/r00sta/dev-features/zephyr:1.0.0": {
+            "version": "4.4.1",
+            "sdkVersion": "1.0.1",
+            "target": "arm"
+        }
+    }
+}
+```
+
+**Dependencies:** Installs after `python` and `cpp` automatically.
+
+---
+
 ## Cross-Platform Support
 All features automatically detect the OS and use the appropriate package manager:
 - **dnf**: RHEL, Fedora, Rocky Linux
@@ -140,6 +169,7 @@ Features install in this order due to `installsAfter` dependencies:
 4. `python` (after base)
 5. `arm-gnu` (after cpp)
 6. `pico-sdk` (after cpp)
+7. `zephyr` (after python, cpp)
 
 ## Distributing Features
 Features are versioned via `version` in `devcontainer-feature.json` (semver). To publish:

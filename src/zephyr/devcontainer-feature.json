@@ -1,0 +1,49 @@
+{
+  "name": "Zephyr RTOS Development Environment",
+  "id": "zephyr",
+  "version": "1.0.0",
+  "description": "Installs Zephyr RTOS, west meta-tool, and Zephyr SDK toolchains",
+  "options": {
+    "version": {
+      "type": "string",
+      "proposals": [
+        "4.4.1",
+        "4.4.0",
+        "4.3.1",
+        "4.3.0",
+        "3.7.0"
+      ],
+      "default": "4.4.1",
+      "description": "Zephyr RTOS version"
+    },
+    "sdkVersion": {
+      "type": "string",
+      "proposals": [
+        "1.0.1",
+        "1.0.0"
+      ],
+      "default": "1.0.1",
+      "description": "Zephyr SDK version"
+    },
+    "target": {
+      "type": "string",
+      "proposals": [
+        "arm",
+        "aarch64",
+        "riscv64",
+        "riscv32",
+        "x86_64",
+        "x86",
+        "arc",
+        "arc64",
+        "all"
+      ],
+      "default": "arm",
+      "description": "Target architecture(s) for SDK toolchains. Comma-separated (e.g. 'arm,riscv64') or 'all'."
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/r00sta/dev-features/python",
+    "ghcr.io/r00sta/dev-features/cpp"
+  ]
+}
