@@ -4,6 +4,7 @@ set -e
 
 HX_VER=${HELIXVERSION:-25.07.1}
 OPENCODE_VER=${OPENCODEVERSION:-latest}
+RUST_VER=${RUSTVERSION:-stable}
 
 install_opencode() {
   log_debug "install_opencode: starting"
@@ -165,6 +166,43 @@ install_gitnr() {
   remote_user_run 'curl -s https://raw.githubusercontent.com/reemus-dev/gitnr/main/scripts/install.sh | bash -s -- -u'
 }
 
+install_rust() {
+  log_debug "install_rust: starting"
+
+  # Check if already installed for the remote user
+  if remote_user_run 'source "$HOME/.cargo/env" 2>/dev/null; command -v cargo >/dev/null 2>&1'; then
+    version=$(remote_user_run 'source "$HOME/.cargo/env" && cargo --version')
+    log_info "Cargo ${version} is already installed"
+    return 0
+  fi
+
+  log_debug "cargo not found for user"
+
+  # Dependencies
+  if ! has_command curl; then
+    log_error "This feature requires curl to be installed. Install with devcontainer feature ghcr.io/devcontainers/features/common-utils"
+    return 1
+  fi
+
+  log_debug "curl found, proceeding with installation"
+  log_info "Installing rust ${RUST_VER} via https://rustup.rs (rustup + cargo)"
+  echo ""
+
+  # rustup installs per-user into ~/.cargo; run as the remote user
+  remote_user_run "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain ${RUST_VER} --profile minimal"
+
+  # Ensure cargo is on PATH in the remote user's zsh session
+  remote_user_run 'echo "source \"\$HOME/.cargo/env\"" >> ~/.zshrc'
+
+  # Verify installation
+  if remote_user_run 'source "$HOME/.cargo/env" 2>/dev/null; command -v cargo >/dev/null 2>&1'; then
+    version=$(remote_user_run 'source "$HOME/.cargo/env" && cargo --version')
+    log_debug "Rust ${version} installed successfully"
+  else
+    log_error "Rust installation verification failed - cargo not in PATH"
+  fi
+}
+
 install_rhel() {
   log_debug "install_rhel: starting"
 
@@ -217,6 +255,7 @@ install_opencode
 install_helix
 install_starship
 install_gitnr
+install_rust
 
 log_info "Copying util.sh for other features to use"
 # Copy util.sh to shared location for other features
