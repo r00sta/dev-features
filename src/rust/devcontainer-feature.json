@@ -1,0 +1,9 @@
+{
+  "name": "Rust Development Environment",
+  "id": "rust",
+  "version": "1.0.0",
+  "description": "Installs rust-analyzer, rustfmt, clippy, and cargo dev tools (watch, edit, nextest, audit, expand) for Rust development",
+  "installsAfter": [
+    "ghcr.io/r00sta/dev-features/base"
+  ]
+}

@@ -129,7 +129,27 @@ Installs Pico SDK (default 2.2.0), builds/installs picotool, sets `PICO_SDK_PATH
 
 ---
 
-### 6. Zephyr RTOS Development Environment (`zephyr`)
+### 6. Rust Development Environment (`rust`)
+Installs the Rust language server (`rust-analyzer`), formatter (`rustfmt`), linter (`clippy`), and cargo dev tools: `cargo-watch`, `cargo-edit`, `cargo-nextest`, `cargo-audit`, `cargo-expand`. Works with the Helix editor via its built-in Rust LSP/formatter defaults.
+
+**Version:** 1.0.0
+
+**Options:** None
+
+**Usage Template:**
+```jsonc
+{
+    "features": {
+        "ghcr.io/r00sta/dev-features/rust:1.0.0": {}
+    }
+}
+```
+
+**Dependencies:** Installs after `base` automatically (requires the Rust toolchain provided by `base`).
+
+---
+
+### 7. Zephyr RTOS Development Environment (`zephyr`)
 Installs Zephyr RTOS, west meta-tool, Python dependencies via uv, and Zephyr SDK toolchains (configurable by architecture).
 
 **Version:** 1.0.0
@@ -167,11 +187,12 @@ All features automatically detect the OS and use the appropriate package manager
 Features install in this order due to `installsAfter` dependencies:
 1. `common-utils` (external)
 2. `base`
-3. `cpp`
-4. `python` (after base)
-5. `arm-gnu` (after cpp)
-6. `pico-sdk` (after cpp)
-7. `zephyr` (after python, cpp)
+3. `rust` (after base)
+4. `cpp`
+5. `python` (after base)
+6. `arm-gnu` (after cpp)
+7. `pico-sdk` (after cpp)
+8. `zephyr` (after python, cpp)
 
 ## Distributing Features
 Features are versioned via `version` in `devcontainer-feature.json` (semver). To publish:
