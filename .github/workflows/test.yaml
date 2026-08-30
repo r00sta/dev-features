@@ -15,6 +15,7 @@ jobs:
         features:
           - base
           - rust
+          - typst
         baseImage:
           - fedora:latest
           - debian:latest

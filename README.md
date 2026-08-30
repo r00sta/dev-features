@@ -149,7 +149,32 @@ Installs the Rust language server (`rust-analyzer`), formatter (`rustfmt`), lint
 
 ---
 
-### 7. Zephyr RTOS Development Environment (`zephyr`)
+### 7. Typst Development Environment (`typst`)
+Installs the Typst compiler (`typst`), the Tinymist language server (`tinymist`), and the Typstyle formatter (`typstyle`) via cargo. Works with the Helix editor via its built-in Typst LSP/formatter defaults (Tinymist + Typstyle).
+
+**Version:** 1.0.0
+
+**Options:**
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `typstVersion` | string | `latest` | typst-cli version to install via cargo (e.g., `0.13.0` or `latest`) |
+
+**Usage Template:**
+```jsonc
+{
+    "features": {
+        "ghcr.io/r00sta/dev-features/typst:1.0.0": {
+            "typstVersion": "latest"
+        }
+    }
+}
+```
+
+**Dependencies:** Installs after `base` automatically (requires the Rust toolchain provided by `base`).
+
+---
+
+### 8. Zephyr RTOS Development Environment (`zephyr`)
 Installs Zephyr RTOS, west meta-tool, Python dependencies via uv, and Zephyr SDK toolchains (configurable by architecture).
 
 **Version:** 1.0.0
@@ -188,11 +213,12 @@ Features install in this order due to `installsAfter` dependencies:
 1. `common-utils` (external)
 2. `base`
 3. `rust` (after base)
-4. `cpp`
-5. `python` (after base)
-6. `arm-gnu` (after cpp)
-7. `pico-sdk` (after cpp)
-8. `zephyr` (after python, cpp)
+4. `typst` (after base)
+5. `cpp`
+6. `python` (after base)
+7. `arm-gnu` (after cpp)
+8. `pico-sdk` (after cpp)
+9. `zephyr` (after python, cpp)
 
 ## Distributing Features
 Features are versioned via `version` in `devcontainer-feature.json` (semver). To publish:

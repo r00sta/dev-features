@@ -1,0 +1,16 @@
+{
+  "name": "Typst Development Environment",
+  "id": "typst",
+  "version": "1.0.0",
+  "description": "Installs typst (CLI), tinymist (LSP), and typstyle (formatter) via cargo for Typst development",
+  "options": {
+    "typstVersion": {
+      "type": "string",
+      "default": "latest",
+      "description": "typst-cli version to install via cargo, eg: 0.13.0 or latest"
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/r00sta/dev-features/base"
+  ]
+}
