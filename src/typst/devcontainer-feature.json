@@ -1,7 +1,7 @@
 {
   "name": "Typst Development Environment",
   "id": "typst",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Installs typst (CLI), tinymist (LSP), and typstyle (formatter) via cargo for Typst development",
   "options": {
     "typstVersion": {

@@ -152,7 +152,7 @@ Installs the Rust language server (`rust-analyzer`), formatter (`rustfmt`), lint
 ### 7. Typst Development Environment (`typst`)
 Installs the Typst compiler (`typst`), the Tinymist language server (`tinymist`), and the Typstyle formatter (`typstyle`) via cargo. Works with the Helix editor via its built-in Typst LSP/formatter defaults (Tinymist + Typstyle).
 
-**Version:** 1.0.0
+**Version:** 1.0.1
 
 **Options:**
 | Option | Type | Default | Description |
@@ -163,7 +163,7 @@ Installs the Typst compiler (`typst`), the Tinymist language server (`tinymist`)
 ```jsonc
 {
     "features": {
-        "ghcr.io/r00sta/dev-features/typst:1.0.0": {
+        "ghcr.io/r00sta/dev-features/typst:1.0.1": {
             "typstVersion": "latest"
         }
     }
