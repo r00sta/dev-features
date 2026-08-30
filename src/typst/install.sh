@@ -47,7 +47,7 @@ install_typst_tools() {
 
   # Install the language server and formatter for Helix (hx)
   log_info "Installing tinymist (LSP) and typstyle (formatter) via cargo"
-  remote_user_run 'source "$HOME/.cargo/env" && cargo install --locked tinymist' || log_error "tinymist installation failed"
+  remote_user_run 'source "$HOME/.cargo/env" && cargo install --git https://github.com/Myriad-Dreamin/tinymist --locked tinymist-cli' || log_error "tinymist installation failed"
   remote_user_run 'source "$HOME/.cargo/env" && cargo install --locked typstyle' || log_error "typstyle installation failed"
 
   # Verify installation
