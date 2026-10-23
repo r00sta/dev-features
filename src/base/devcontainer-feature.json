@@ -1,8 +1,8 @@
 {
   "name": "Base Development Environment",
   "id": "base",
-  "version": "1.0.8",
-  "description": "Installs core packages, utilities, helix editor, opencode, and rust/cargo",
+  "version": "1.0.9",
+  "description": "Installs core packages, utilities, helix/mitos editors, opencode, and rust/cargo",
   "options": {
     "helixVersion": {
       "type": "string",
@@ -16,6 +16,15 @@
       ],
       "default": "25.07.1",
       "description": "Helix editor version"
+    },
+    "mitosVersion": {
+      "type": "string",
+      "proposals": [
+        "0.1.1",
+        "0.1.0"
+      ],
+      "default": "latest",
+      "description": "Mitos editor version"
     },
     "opencodeVersion": {
       "type": "string",

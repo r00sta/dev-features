@@ -3,6 +3,7 @@ set -e
 . ./util.sh
 
 HX_VER=${HELIXVERSION:-25.07.1}
+MITOS_VER=${MITOSVERSION:-latest}
 OPENCODE_VER=${OPENCODEVERSION:-latest}
 RUST_VER=${RUSTVERSION:-stable}
 
@@ -102,6 +103,48 @@ install_helix() {
     log_debug "Helix ${version} installed successfully"
   else
     log_error "Helix installation verification failed - hx not in PATH"
+  fi
+}
+
+install_mitos() {
+  log_debug "install_mitos: starting"
+
+  # Check if already installed
+  if remote_user_run "command -v ms" >/dev/null 2>&1; then
+    version=$(remote_user_run 'ms --version 2>&1 | head -n1')
+    log_info "Mitos ${version} is already installed"
+    return 0
+  fi
+
+  log_debug "ms not found for user"
+
+  # Dependencies
+  if ! has_command curl; then
+    log_error "This feature requires curl to be installed. Install with devcontainer feature ghcr.io/devcontainers/features/common-utils"
+    return 1
+  fi
+
+  log_debug "curl found, proceeding with installation"
+  log_info "Installing Mitos via https://mitos.computer/install.sh"
+  echo ""
+
+  # Run the install as the remote user, as script installs locally
+  # and verifies the download; it does not modify shell PATH.
+  if [ "${MITOS_VER-latest}" = "latest" ]; then
+    remote_user_run "curl -fsSL https://mitos.computer/install.sh | sh -s --"
+  else
+    remote_user_run "curl -fsSL https://mitos.computer/install.sh | sh -s -- --version $MITOS_VER"
+  fi
+
+  # Add ms to PATH in user's shell config
+  remote_user_run "echo \"export PATH=\"\$HOME/.local/bin:\$PATH\"\" >> ~/.zshrc"
+
+  # Verify installation
+  if remote_user_run 'export PATH="$HOME/.local/bin:$PATH" && command -v ms' >/dev/null 2>&1; then
+    version=$(remote_user_run 'export PATH="$HOME/.local/bin:$PATH" && ms --version 2>&1 | head -n1')
+    log_debug "Mitos ${version} installed successfully"
+  else
+    log_error "Mitos installation verification failed"
   fi
 }
 
@@ -253,6 +296,7 @@ log_info "Running OS agnostice installs"
 
 install_opencode
 install_helix
+install_mitos
 install_starship
 install_gitnr
 install_rust

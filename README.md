@@ -13,14 +13,15 @@ The `base` feature installs `util.sh` to `/usr/local/share/devcontainers/` for u
 ## Features
 
 ### 1. Base Development Environment (`base`)
-Installs core packages, Helix editor, OpenCode, Starship, Gitnr, Rust/Cargo (via rustup), and copies shared `util.sh` to the system.
+Installs core packages, Helix editor, Mitos editor, OpenCode, Starship, Gitnr, Rust/Cargo (via rustup), and copies shared `util.sh` to the system.
 
-**Version:** 1.0.8
+**Version:** 1.0.9
 
 **Options:**
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `helixVersion` | string | `25.07.1` | Helix editor version. Proposals: `25.07.1`, `25.07`, `25.01.1`, `25.01`, `24.07`, `24.03` |
+| `mitosVersion` | string | `latest` | Mitos editor (Helix fork, binary `ms`) version. Proposals: `0.1.1`, `0.1.0` |
 | `opencodeVersion` | string | `latest` | OpenCode version (e.g., `1.1.13`) |
 | `rustVersion` | string | `stable` | Rust toolchain version to install via rustup (e.g., `stable`, `nightly`, `1.81.0`) |
 
@@ -28,8 +29,9 @@ Installs core packages, Helix editor, OpenCode, Starship, Gitnr, Rust/Cargo (via
 ```jsonc
 {
     "features": {
-        "ghcr.io/r00sta/dev-features/base:1.0.8": {
+        "ghcr.io/r00sta/dev-features/base:1.0.9": {
             "helixVersion": "25.07.1",
+            "mitosVersion": "latest",
             "opencodeVersion": "latest",
             "rustVersion": "stable"
         }
